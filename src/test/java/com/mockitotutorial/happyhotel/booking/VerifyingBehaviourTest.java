@@ -56,7 +56,7 @@ class VerifyingBehaviourTest {
 //        given
         BookingRequest bookingRequest =
                 new BookingRequest("1",  LocalDate.of(2020, 1,1),
-                        LocalDate.of(2020, 1,5),2, true); // prepaid determine the payment method.
+                        LocalDate.of(2020, 1,5),2, false); // prepaid determine the payment method.
 
 
 //        when
