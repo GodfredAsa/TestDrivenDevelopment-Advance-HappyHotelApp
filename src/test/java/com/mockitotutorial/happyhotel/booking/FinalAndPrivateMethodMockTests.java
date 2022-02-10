@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class BookingServiceTest {
+class FinalAndPrivateMethodMockTests {
 
     BookingService underTest;
 
@@ -51,29 +51,19 @@ class BookingServiceTest {
 
 
     @Test
-    void countAvailablePlacesWithOneRoom() {
+    void countAvailablePlacesWhenOneRoomAvailable() {
 //     given
-        when(this.roomServiceMock.getAvailableRooms()).thenReturn(Collections.singletonList(new Room("Room 1", 2)));
-        int expected = 2; // it's based on the capacity
+        when(this.roomServiceMock.getAvailableRooms()).thenReturn(Collections.singletonList(new Room("Room 1", 5)));
+        int expectedCapacity = 5;
 
 //     when
-        int actual = underTest.getAvailablePlaceCount();
+        int actualCapacity = underTest.getAvailablePlaceCount();
 
 //     then
-        assertEquals(expected, actual);
+        assertEquals(expectedCapacity, actualCapacity);
     }
 
-    @Test
-    void countAvailablePlacesWithManyRooms() {
 
-        List<Room> rooms = Arrays.asList(new Room("Room 1", 2), new Room("Room 1", 20));
-        when(this.roomServiceMock.getAvailableRooms()).thenReturn(rooms);
-        int expected = 22;
-
-        int actual = underTest.getAvailablePlaceCount();
-
-        assertEquals(expected, actual);
-    }
 
 //    Multiple thenReturn calls
 //    On the first call returns 2 as the capacity
@@ -116,10 +106,9 @@ class BookingServiceTest {
         int expected = 0;
 
 //     when
-
         int actual = underTest.getAvailablePlaceCount();
-//     then
 
+//     then
         assertEquals(expected, actual);
 
     }
