@@ -59,7 +59,7 @@ public class MockingVoidMethodsTest {
                 new BookingRequest("1",  LocalDate.of(2020, 1, 1),
                         LocalDate.of(2020, 1,5),2, false);
         doNothing().when(mailSenderMock).sendBookingConfirmation(any());
-//        doNothing() is the default method so you can comment it out and still get the same result
+//        doNothing() is the default method you can comment it out and still get the same result
 
 //        when
        underTest.makeBooking(bookingRequest);
