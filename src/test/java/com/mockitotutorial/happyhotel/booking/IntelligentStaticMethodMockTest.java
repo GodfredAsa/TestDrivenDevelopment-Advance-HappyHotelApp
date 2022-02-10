@@ -9,11 +9,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.BDDMockito.anyDouble;
+import static org.mockito.BDDMockito.mockStatic;
 
 
 @ExtendWith({MockitoExtension.class})
-class StaticMethodMockTest {
+class IntelligentStaticMethodMockTest {
 
     @InjectMocks BookingService underTest;
 
@@ -28,8 +29,7 @@ class StaticMethodMockTest {
 
 
 
-    @Test
-    void shouldCalculateCorrectPrice() {
+    @Test void shouldCalculateCorrectPrice() {
         try(MockedStatic<CurrencyConverter> mockedConverter = mockStatic(CurrencyConverter.class)){
 
             //        given
@@ -37,8 +37,9 @@ class StaticMethodMockTest {
                     new BookingRequest("1",  LocalDate.of(2020, 1,1),
                             LocalDate.of(2020, 1,5),2, false);
 
-            double expected = 400.0;
-            mockedConverter.when(()-> CurrencyConverter.toEuro(anyDouble())).thenReturn(400.0);
+            double expected = 400.0 * 0.8;
+            mockedConverter.when(()-> CurrencyConverter.toEuro(anyDouble()))
+                    .thenAnswer(inv -> (double) inv.getArgument(0) * 0.8);
 
 //       when
             double actual = underTest.calculatePriceEuro(bookingRequest);
