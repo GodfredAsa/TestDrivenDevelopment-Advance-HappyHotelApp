@@ -1,13 +1,11 @@
-package com.mockitotutorial.happyhotel.booking;
-
+package com.mockitotutorial.happyhotel.booking.firstTestingFollowed;
+import com.mockitotutorial.happyhotel.booking.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -15,12 +13,10 @@ import static org.mockito.Mockito.when;
 class BookingServiceTest {
 
     BookingService underTest;
-
     RoomService roomServiceMock;
     MailSender mailSenderMock;
     PaymentService paymentServiceMock;
     BookingDAO bookingDAOMock;
-
 
     @BeforeEach
     void setUp() {
@@ -28,9 +24,7 @@ class BookingServiceTest {
         mailSenderMock = mock(MailSender.class);
         paymentServiceMock = mock(PaymentService.class);
         bookingDAOMock = mock(BookingDAO.class);
-
         underTest = new BookingService(paymentServiceMock, roomServiceMock, bookingDAOMock,mailSenderMock);
-
     }
 
     @Test
@@ -39,26 +33,20 @@ class BookingServiceTest {
         BookingRequest bookingRequest =
                 new BookingRequest("1",  LocalDate.of(2020, 1,1),
                                                LocalDate.of(2020, 1,5),2, false);
-
         double expected  =  4 * 2 * 50.0;
-
 //        when
         double actual = underTest.calculatePrice(bookingRequest);
-
 // then
         assertEquals(expected, actual);
     }
-
 
     @Test
     void countAvailablePlacesWithOneRoom() {
 //     given
         when(this.roomServiceMock.getAvailableRooms()).thenReturn(Collections.singletonList(new Room("Room 1", 2)));
         int expected = 2; // it's based on the capacity
-
 //     when
         int actual = underTest.getAvailablePlaceCount();
-
 //     then
         assertEquals(expected, actual);
     }
@@ -100,9 +88,9 @@ class BookingServiceTest {
 
 //     then
         assertAll(
-                () -> assertEquals(expectedFirst, actualFirst, "first call 2 in the room "),
+                () -> assertEquals(expectedFirst, actualFirst, "first call 2 in the room"),
                 () -> assertEquals(expectedSecond, actualSecond, "second call empty room"),
-                () -> assertEquals(expectedThird, actualThird, "tests list of rooms")
+                () -> assertEquals(expectedThird, actualThird, "tests list of rooms 22")
         );
     }
 

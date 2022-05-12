@@ -1,6 +1,7 @@
-package com.mockitotutorial.happyhotel.booking;
+package com.mockitotutorial.happyhotel.booking.firstTestingFollowed;
 
 
+import com.mockitotutorial.happyhotel.booking.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

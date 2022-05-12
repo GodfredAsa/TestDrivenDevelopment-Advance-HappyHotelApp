@@ -1,7 +1,8 @@
-package com.mockitotutorial.happyhotel.booking;
+package com.mockitotutorial.happyhotel.booking.firstTestingFollowed;
 
 
 
+import com.mockitotutorial.happyhotel.booking.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -17,12 +18,17 @@ import static org.mockito.BDDMockito.*;
 @ExtendWith({MockitoExtension.class})
 class StrictStubbingTest {
 
-    @InjectMocks BookingService underTest;
+    @InjectMocks
+    BookingService underTest;
 
-    @Mock RoomService roomServiceMock;
-    @Mock MailSender mailSenderMock;
-    @Mock PaymentService paymentServiceMock;
-    @Spy BookingDAO bookingDAOMock;
+    @Mock
+    RoomService roomServiceMock;
+    @Mock
+    MailSender mailSenderMock;
+    @Mock
+    PaymentService paymentServiceMock;
+    @Spy
+    BookingDAO bookingDAOMock;
 
     @Captor private ArgumentCaptor<Double> doubleArgumentCaptor;
 

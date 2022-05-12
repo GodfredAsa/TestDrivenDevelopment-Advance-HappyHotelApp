@@ -1,24 +1,16 @@
-package com.mockitotutorial.happyhotel.booking;
-
-
-
+package com.mockitotutorial.happyhotel.booking.firstTestingFollowed;
+import com.mockitotutorial.happyhotel.booking.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-
-
 import java.time.LocalDate;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
 public class ThrowingExceptionBookingRoom {
 
     BookingService underTest;
-
     RoomService roomServiceMock;
     MailSender mailSenderMock;
     PaymentService paymentServiceMock;

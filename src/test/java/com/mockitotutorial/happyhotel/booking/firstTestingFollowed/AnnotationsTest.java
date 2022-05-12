@@ -1,6 +1,7 @@
-package com.mockitotutorial.happyhotel.booking;
+package com.mockitotutorial.happyhotel.booking.firstTestingFollowed;
 
 
+import com.mockitotutorial.happyhotel.booking.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -17,12 +18,17 @@ import static org.mockito.Mockito.*;
 @ExtendWith({MockitoExtension.class})
 class AnnotationsTest {
 
-    @InjectMocks BookingService underTest;
+    @InjectMocks
+    BookingService underTest;
 
-    @Mock RoomService roomServiceMock;
-    @Mock MailSender mailSenderMock;
-    @Mock PaymentService paymentServiceMock;
-    @Spy BookingDAO bookingDAOMock;
+    @Mock
+    RoomService roomServiceMock;
+    @Mock
+    MailSender mailSenderMock;
+    @Mock
+    PaymentService paymentServiceMock;
+    @Spy
+    BookingDAO bookingDAOMock;
 
     @Captor private ArgumentCaptor<Double> doubleArgumentCaptor;
 
@@ -32,14 +38,11 @@ class AnnotationsTest {
     void shouldPayCorrectPriceWhenInputOk() {
 //        given
         BookingRequest bookingRequest =
-                new BookingRequest("1",  LocalDate.of(2020, 1,1),
-                                               LocalDate.of(2020, 1,5),2, true);
-
-        //        when
+                new BookingRequest("1",  LocalDate.of(2020, 1,1), LocalDate.of(2020, 1,5),2, true);
+//  when
         underTest.makeBooking(bookingRequest);
 
-
-//        then
+//  then
         verify(paymentServiceMock).pay( eq(bookingRequest), doubleArgumentCaptor.capture());
 
 //        getting the value from the captor
