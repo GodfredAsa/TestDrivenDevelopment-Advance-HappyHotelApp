@@ -1,11 +1,13 @@
-package com.mockitotutorial.happyhotel.booking;
+package com.mockitotutorial.happyhotel.booking._01_basicConcepts;
+import com.mockitotutorial.happyhotel.booking.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
+import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-class Test01FirstMocks {
+class Test05PrivateAndFinalMethods {
     private BookingService bookingService;
     private PaymentService paymentServiceMock;
     private RoomService roomServiceMock;
@@ -21,21 +23,22 @@ class Test01FirstMocks {
         this.bookingService = new BookingService(paymentServiceMock, roomServiceMock, bookingDAOMock, mailSenderMock);
     }
 
+    /**
+     * for final methods use mockito inline
+     *
+     * NB: NEVER TRY TO MOCK A PRIVATE METHOD BCOS YOU CAN'T MOCK A PRIVATE METHOD
+     */
+
     @Test
-    void shouldCalculateCorrectPriceWithCorrectInput() {
-/**
- * this is calculated based on the number of days difference between the two days
- * the 2 refers to the guess counts
- * 50.0 refers to the price per day
- * described in the booking request class
- */
-        BookingRequest bookingRequest =
-                new BookingRequest("1",  LocalDate.of(2020, 1,1),
-                        LocalDate.of(2020, 1,10),2, false);
-        double expected  =  9 * 2 * 50.0;
+    void should_CountAvailablePlacesWhenOneRoomAvailable(){
+        when(this.roomServiceMock
+                .getAvailableRooms())
+                .thenReturn(Collections.singletonList(new Room("Room 1", 2)));
 
-        double actual = bookingService.calculatePrice(bookingRequest);
+        int expectedPlaceCount  = 2;
 
-        assertEquals(expected, actual);
+        int actualPlaceCount = bookingService.getAvailablePlaceCount();
+
+        assertEquals(expectedPlaceCount, actualPlaceCount);
     }
 }

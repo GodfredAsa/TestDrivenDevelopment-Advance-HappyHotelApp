@@ -6,5 +6,4 @@ public class MailSender {
 		// TODO Not done yet. John Smith to implement!
 		throw new UnsupportedOperationException("Not implemented yet");
 	}
-
 }
